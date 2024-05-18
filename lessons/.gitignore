@@ -1,0 +1,6 @@
+
+target/
+dbt_packages/
+logs/
+windy-nation-423614-m3-843228a8615e.json
+.venv
