@@ -16,9 +16,12 @@ models:
         description: ""
 
       - name: status
+      # look in the documents/doc_ecommerce_status.md for this definition
+      # we can re-use this definition in any other column 
         data_type: string
-        description: ""
+        description: "{{ doc('status') }}"
         tests:
+          - not_null
           - accepted_values:
               name: unexpected_order_status # we can name our test to debug easily 
               values:
@@ -44,6 +47,9 @@ models:
         tests:
           - not_null:
               where: "delivered_at IS NOT NULL OR status = 'Shipped'"
+          - dbt_utils.expression_is_true:
+              where: "shipped_at IS NOT NULL"
+
 
       - name: delivered_at
         data_type: timestamp
